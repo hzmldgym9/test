@@ -65,63 +65,38 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
 
     //-------------matrix----------//
-//    implementation group: "com.tencent.matrix", name: "matrix-android-lib", version: MATRIX_VERSION, changing: true
-//    implementation group: "com.tencent.matrix", name: "matrix-android-commons", version: MATRIX_VERSION, changing: true
-//    implementation group: "com.tencent.matrix", name: "matrix-trace-canary", version: MATRIX_VERSION, changing: true
-//    implementation group: "com.tencent.matrix", name: "matrix-resource-canary-android", version: MATRIX_VERSION, changing: true
-//    implementation group: "com.tencent.matrix", name: "matrix-resource-canary-common", version: MATRIX_VERSION, changing: true
-//    implementation group: "com.tencent.matrix", name: "matrix-io-canary", version: MATRIX_VERSION, changing: true
-//    implementation group: "com.tencent.matrix", name: "matrix-sqlite-lint-android-sdk", version: MATRIX_VERSION, changing: true
-//    implementation (group: "com.tencent.matrix", name: "matrix-battery-canary", version: MATRIX_VERSION, changing: true) {
-//        exclude group: 'com.tencent', module: 'mmkv'
-//    }
-//    implementation group: "com.tencent.matrix", name: "matrix-hooks", version: MATRIX_VERSION, changing: true
+    implementation group: "com.tencent.matrix", name: "matrix-android-lib", version: MATRIX_VERSION, changing: true
+    implementation group: "com.tencent.matrix", name: "matrix-android-commons", version: MATRIX_VERSION, changing: true
+    implementation group: "com.tencent.matrix", name: "matrix-trace-canary", version: MATRIX_VERSION, changing: true
+    implementation group: "com.tencent.matrix", name: "matrix-resource-canary-android", version: MATRIX_VERSION, changing: true
+    implementation group: "com.tencent.matrix", name: "matrix-resource-canary-common", version: MATRIX_VERSION, changing: true
+    implementation group: "com.tencent.matrix", name: "matrix-io-canary", version: MATRIX_VERSION, changing: true
+    implementation group: "com.tencent.matrix", name: "matrix-sqlite-lint-android-sdk", version: MATRIX_VERSION, changing: true
+    implementation (group: "com.tencent.matrix", name: "matrix-battery-canary", version: MATRIX_VERSION, changing: true) {
+        exclude group: 'com.tencent', module: 'mmkv'
+    }
+    implementation group: "com.tencent.matrix", name: "matrix-hooks", version: MATRIX_VERSION, changing: true
     //-------------matrix----------//
 
-    implementation "com.bytedance.btrace:rhea-core:1.0.1"
 }
-
-//-------------btrace----------//
-apply plugin: 'com.bytedance.rhea-trace'
-rheaTrace {
-
-    compilation {
-        //为减少 APK 体积, 你可以为 App 中需要跟踪的方法设置 id 以此来跟踪此自定义事件, 默认值 false。
-        traceWithMethodID = false
-        //该文件配置决定哪些方法您不希望跟踪, 默认值 null。
-        traceFilterFilePath = "${project.rootDir}/rhea-trace/traceFilter.txt"
-        //用特指定方法 id 来设置自定义事件名称, 默认值 null。
-        applyMethodMappingFilePath = "${project.rootDir}/rhea-trace/keep-method-id.txt"
-    }
-
-    runtime {
-        //仅在主线程抓取跟踪事件, 默认值 false。
-        mainThreadOnly true
-        //在 App 启动之初开始抓取跟踪事件, 默认值 true。
-        startWhenAppLaunch true
-        //指定内存存储 atrace 数据 ring buffer 的大小。
-        atraceBufferSize "500000"
-    }
-}
-//-------------btrace----------//
 
 //-------------matrix----------//
-//configurations {
-//    apkCheckerDependency
-//    sevenZipDependency
-//}
-//
-//if (!removeUnusedResourcesV2Enable) {
-//    project.ext.unusedResourcesSet = new HashSet<String>()
-//}
-//apply plugin: 'com.tencent.matrix-plugin'
-//matrix {
-//    logLevel "D"
-//
-//    trace {
-//        enable = true
-//        baseMethodMapFile = "${project.projectDir}/matrixTrace/methodMapping.txt"
-//        blackListFile = "${project.projectDir}/matrixTrace/blackMethodList.txt"
-//    }
-//}
+configurations {
+    apkCheckerDependency
+    sevenZipDependency
+}
+
+if (!removeUnusedResourcesV2Enable) {
+    project.ext.unusedResourcesSet = new HashSet<String>()
+}
+apply plugin: 'com.tencent.matrix-plugin'
+matrix {
+    logLevel "D"
+
+    trace {
+        enable = true
+        baseMethodMapFile = "${project.projectDir}/matrixTrace/methodMapping.txt"
+        blackListFile = "${project.projectDir}/matrixTrace/blackMethodList.txt"
+    }
+}
 //-------------matrix----------//

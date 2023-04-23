@@ -4,8 +4,6 @@ buildscript {
     dependencies {
         // matrix
         classpath ("com.tencent.matrix:matrix-gradle-plugin:${MATRIX_VERSION}") { changing = true }
-        // btrace
-        classpath 'com.bytedance.btrace:rhea-gradle-plugin:1.0.1'
     }
 }
 
